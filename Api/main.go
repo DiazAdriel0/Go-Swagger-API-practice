@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	// "net/http"
+    "net/http"
+    "github.com/gin-gonic/gin"
 )
 
 // user represents data about a user.
@@ -22,8 +22,15 @@ var users = []user{
 }
 
 func main() {
-	fmt.Println(users)
-	/* http.ListenAndServe(":3000", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Welcome to my API")
-	})) */
+    router := gin.Default()
+    router.GET("/users", getUsers)
+
+    router.Run("localhost:8080")
 }
+
+// getUsers responds with the list of all users as JSON.
+func getUsers(c *gin.Context) {
+    c.IndentedJSON(http.StatusOK, users)
+}
+
+
