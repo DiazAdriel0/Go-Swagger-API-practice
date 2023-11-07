@@ -43,7 +43,7 @@ func postUsers(c *gin.Context) {
         return
     }
 
-    // Add the new album to the slice.
+    // Add the new user to the slice.
     users = append(users, newUser)
     c.IndentedJSON(http.StatusCreated, newUser)
 }
