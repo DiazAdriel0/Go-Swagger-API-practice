@@ -7,3 +7,7 @@ Este repositorio es parte de mi proceso de aprendizaje de cómo usar Go y Swagge
 - Aprender a diseñar APIs utilizando Swagger.
 - Implementar endpoints de práctica en Go.
 - Documentar claramente las rutas y endpoints de la API.
+
+## Uso
+
+Cuando esté implementado voy a agregar el link a SwaggerUI
