@@ -24,6 +24,7 @@ var users = []user{
 func main() {
     router := gin.Default()
     router.GET("/users", getUsers)
+	router.POST("/users", postUsers)
 
     router.Run("localhost:8080")
 }
@@ -33,4 +34,16 @@ func getUsers(c *gin.Context) {
     c.IndentedJSON(http.StatusOK, users)
 }
 
+// postUsers adds an user from JSON received in the request body.
+func postUsers(c *gin.Context) {
+    var newUser user
 
+    // Call BindJSON to bind the received JSON to newUser.
+    if err := c.BindJSON(&newUser); err != nil {
+        return
+    }
+
+    // Add the new album to the slice.
+    users = append(users, newUser)
+    c.IndentedJSON(http.StatusCreated, newUser)
+}
