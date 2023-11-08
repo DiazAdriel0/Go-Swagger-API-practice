@@ -1,4 +1,4 @@
-module main
+module github.com/diazadriel0/Go-Swagger-API-practice/Api
 
 go 1.21.3
 
