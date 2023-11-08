@@ -10,6 +10,14 @@ Este repositorio es parte de mi proceso de aprendizaje de cómo usar Go y Swagge
 
 ## Uso
 
+Los endpoints POST y PUT deben llamarse con el token de autorización dentro del header
+
+{
+
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.gn9R2tukECKQj5uliAKUgRuJOUWTSdIAargv0o4yyfc
+
+}
+
 👇🏼👇🏼 Link a la documentación hecha con Swagger 👇🏼👇🏼
 
 https://app.swaggerhub.com/apis-docs/DIAZADRIEL0_1/SwaggerPractice/1.0.0#
