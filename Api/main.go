@@ -10,7 +10,7 @@ type user struct {
     ID     			string  `json:"id"`
     Username  		string  `json:"username"`
     Email			string  `json:"email"`
-    Age 			int 	`json:"age"`
+    Age 			int8 	`json:"age"`
 	Transactions	int		`json:"transactions"`
 }
 
