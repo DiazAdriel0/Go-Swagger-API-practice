@@ -10,4 +10,10 @@ Este repositorio es parte de mi proceso de aprendizaje de cómo usar Go y Swagge
 
 ## Uso
 
-Cuando esté implementado voy a agregar el link a SwaggerUI
+👇🏼👇🏼 Link a la documentación hecha con Swagger 👇🏼👇🏼
+
+https://app.swaggerhub.com/apis-docs/DIAZADRIEL0_1/SwaggerPractice/1.0.0#
+
+👇🏼👇🏼 Link a la config de la documentación hecha en Swagger Editor 👇🏼👇🏼
+
+https://app.swaggerhub.com/apis/DIAZADRIEL0_1/SwaggerPractice/1.0.0#/
