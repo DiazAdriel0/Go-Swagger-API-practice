@@ -45,16 +45,16 @@ func ValidateUser(ctx *gin.Context, request *http.Request) (bool, int16, error, 
 		return false, 401, errors.New("required token"), claim{}
 	}
 
-	JWTSign := strings.Split(ctx.GetHeader("Authorization"), ".")[2]
-	
-	claims, access, message, err := ProcessToken(token, JWTSign)
+	// The JWTSign is shown for testing purposes
+	// The real sign is stored in the .env file
+	claims, access, message, err := ProcessToken(token, "secretKeyOnJWT")
 
 	if !access {
 		if err != nil {
-			fmt.Println("Token error" + message)
+			fmt.Println("Token error: " + message)
 			return false, 401, err, claim{}
 		} else {
-			fmt.Println("Token error" + message)
+			fmt.Println("Token error: " + message)
 			return false, 401, err, claim{}
 		}
 	}	
