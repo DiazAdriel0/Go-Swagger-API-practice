@@ -3,6 +3,7 @@ package main
 import (
     "net/http"
     "github.com/gin-gonic/gin"
+    "github.com/diazadriel0/Go-Swagger-API-practice/Api/jwt"
 )
 
 // user represents data about a user.
@@ -38,16 +39,22 @@ func getUsers(c *gin.Context) {
 
 // postUsers adds an user from JSON received in the request body.
 func postUsers(c *gin.Context) {
-    var newUser user
+    access, _, _, _ := jwt.ValidateUser(c, c.Request)
+    
+    if !access {
+        c.IndentedJSON(http.StatusUnauthorized, gin.H{"message": "unauthorized"})
+    } else { 
+        var newUser user
 
-    // Call BindJSON to bind the received JSON to newUser.
-    if err := c.BindJSON(&newUser); err != nil {
-        return
+        // Call BindJSON to bind the received JSON to newUser.
+        if err := c.BindJSON(&newUser); err != nil {
+            return
+        }
+
+        // Add the new user to the slice.
+        users = append(users, newUser)
+        c.IndentedJSON(http.StatusCreated, newUser)
     }
-
-    // Add the new user to the slice.
-    users = append(users, newUser)
-    c.IndentedJSON(http.StatusCreated, newUser)
 }
 
 // getUserByID locates the user whose ID value matches the id
@@ -67,23 +74,28 @@ func getUserByID(c *gin.Context) {
 }
 
 func updateUser(c *gin.Context) {
-	id := c.Param("id")
-	var updatedUser user
+    access, _, _, _ := jwt.ValidateUser(c, c.Request)
+    
+    if !access {
+        c.IndentedJSON(http.StatusUnauthorized, gin.H{"message": "unauthorized"})
+    } else { 
+    	id := c.Param("id")
+    	var updatedUser user
 
-    // Call BindJSON to bind the received JSON to newUser.
-    if err := c.BindJSON(&updatedUser); err != nil {
-        return
+        // Call BindJSON to bind the received JSON to newUser.
+        if err := c.BindJSON(&updatedUser); err != nil {
+            return
+        }
+
+    	// Loop over the list of users, looking for
+    	// an user whose ID value matches the parameter.
+    	for _, a := range users {
+    		if a.ID == id {
+    			a = updatedUser
+    			c.IndentedJSON(http.StatusOK, updatedUser)
+    			return
+    		}
+    	}
+    	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "user not found"})
     }
-
-
-	// Loop over the list of users, looking for
-	// an user whose ID value matches the parameter.
-	for _, a := range users {
-		if a.ID == id {
-			a = updatedUser
-			c.IndentedJSON(http.StatusOK, updatedUser)
-			return
-		}
-	}
-	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "user not found"})
 }
